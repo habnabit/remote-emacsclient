@@ -5,11 +5,11 @@ import socket
 import sys
 
 quote_map = {'&': '&&', '-': '&-', '\n': '&n', ' ': '&_'}
-reverse_quote_map = {v: k for v, k in quote_map.iteritems()}
+reverse_quote_map = {v: k for k, v in quote_map.iteritems()}
 def quote(s):
     return re.sub(r'[-&\n ]', lambda m: quote_map[m.group()], s)
 def unquote(s):
-    return re.sub(r'&[-&n_]', lambda m: quote_map[m.group()], s)
+    return re.sub(r'&[-&n_]', lambda m: reverse_quote_map[m.group()], s)
 
 nowait = False
 if sys.argv[1:2] == ['-n']:
