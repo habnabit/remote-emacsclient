@@ -26,7 +26,7 @@ sock = socket.socket()
 sock.connect((host, int(port)))
 
 pwd = os.getcwd()
-tramp_args = [client_auth, '-dir', quote(tramp_prefix + pwd)]
+tramp_args = [client_auth, '-dir', tramp_prefix + quote(pwd)]
 if nowait:
     tramp_args.append('-nowait')
 
@@ -35,7 +35,7 @@ for arg in args:
         tramp_args.extend(['-position', quote(arg)])
     else:
         tramp_args.extend(
-            ['-file', quote(tramp_prefix + os.path.join(pwd, arg))])
+            ['-file', tramp_prefix + quote(os.path.join(pwd, arg))])
 
 sock.sendall(' '.join(tramp_args) + '\n')
 buffer = ''
